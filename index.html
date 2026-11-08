@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NexPulse.ai — Autonomous GEO Agency OS</title>
+  <meta name="description" content="Autonomous Generative Engine Optimization (GEO) & Technical SEO Agency Operating System. 5-Agent Operations Center, Real-Time Latency Telemetry, and White-Label Founder Dashboard.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#000000',
+            neon: '#00FF00',
+            'neon-glow': '#00ff66',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #000000;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .neon-border {
+      border: 1px solid #00FF00;
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+    }
+    
+    .neon-border-subtle {
+      border: 1px solid rgba(0, 255, 0, 0.3);
+    }
+
+    .neon-glow-text {
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+    }
+
+    .warning-glow {
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.35);
+    }
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #000000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1f2937;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00FF00;
+    }
+
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.97); }
+    }
+    .animate-pulse-slow {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+
+<body class="bg-black text-slate-100 min-h-screen flex flex-col selection:bg-[#00FF00] selection:text-black">
+
+  <!-- TOP HEADER NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-black/95 backdrop-blur border-b border-gray-900 px-4 py-3">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      
+      <!-- Brand & OS Badge -->
+      <div class="flex items-center gap-3">
+        <div class="relative flex items-center justify-center w-8 h-8 rounded-lg bg-black border border-[#00FF00] shadow-[0_0_12px_rgba(0,255,0,0.3)]">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#00FF00] animate-pulse"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold tracking-tight text-white text-base sm:text-lg">NexPulse<span class="text-[#00FF00]">.ai</span></span>
+            <span class="hidden sm:inline-block text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-[#00FF00]/10 text-[#00FF00] border border-[#00FF00]/30 font-bold">
+              AUTONOMOUS GEO OS
+            </span>
+          </div>
+          <p class="text-[10px] text-gray-500 font-mono hidden md:block">5-Agent Force Consensus · Real-Time Telemetry Node</p>
+        </div>
+      </div>
+
+      <!-- Center View Switcher -->
+      <div class="flex items-center bg-[#090d13] p-1 rounded-lg border border-gray-800 text-xs font-mono">
+        <button id="viewFounderBtn" onclick="switchView('founder')" class="px-2.5 py-1 rounded font-bold transition-all bg-[#00FF00]/20 text-[#00FF00] border border-[#00FF00]/40 shadow-[0_0_10px_rgba(0,255,0,0.2)]">
+          FOUNDER CONSOLE
+        </button>
+        <button id="viewClientBtn" onclick="switchView('client')" class="px-2.5 py-1 rounded font-bold text-gray-400 hover:text-white transition-all">
+          CLIENT PORTAL
+        </button>
+      </div>
+
+      <!-- Right Action Toolbar: Currency, Pitch Demo, Whitelabel -->
+      <div class="flex items-center gap-2">
+        <!-- Currency Selector -->
+        <select id="currencySelector" onchange="changeCurrency(this.value)" class="bg-[#090d13] border border-gray-800 text-gray-300 text-xs rounded px-2 py-1 font-mono focus:outline-none focus:border-[#00FF00] cursor-pointer">
+          <option value="USD">USD ($)</option>
+          <option value="GBP">GBP (£)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="ZAR">ZAR (R)</option>
+        </select>
+
+        <!-- Pitch Demo Mode Toggle -->
+        <button id="pitchDemoBtn" onclick="togglePitchDemo()" class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-mono border border-gray-700 bg-gray-950 text-gray-300 hover:border-[#00FF00] transition-colors" title="Toggle Demo State vs $0 DB State">
+          <span id="demoDot" class="w-1.5 h-1.5 rounded-full bg-[#00FF00]"></span>
+          <span id="demoText" class="font-bold">DEMO: $28.5k MRR</span>
+        </button>
+
+        <!-- Settings Modal Trigger -->
+        <button onclick="toggleSettingsModal(true)" class="p-1.5 rounded border border-gray-800 bg-[#090d13] text-gray-400 hover:text-white hover:border-[#00FF00] transition-all" title="Agency Whitelabel Settings">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-5 space-y-5">
+
+    <!-- ========================================== -->
+    <!-- VIEW A: MASTER FOUNDER CONSOLE             -->
+    <!-- ========================================== -->
+    <div id="founderConsoleView" class="space-y-5">
+      
+      <!-- Top Metrics Strip (MRR, Margins, Autonomous Audits) -->
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-3 font-mono">
+        <div class="bg-black p-3.5 rounded-xl border border-gray-900 relative overflow-hidden">
+          <div class="text-[10px] text-gray-500 uppercase tracking-wider">MONTHLY RECURRING REV</div>
+          <div class="text-xl sm:text-2xl font-extrabold text-[#00FF00] mt-1" id="metricMrr">$28,500</div>
+          <div class="text-[10px] text-gray-400 mt-0.5">19 Active Clients @ $1.5k/mo</div>
+        </div>
+
+        <div class="bg-black p-3.5 rounded-xl border border-gray-900">
+          <div class="text-[10px] text-gray-500 uppercase tracking-wider">NET PROFIT MARGIN</div>
+          <div class="text-xl sm:text-2xl font-extrabold text-white mt-1">91.4%</div>
+          <div class="text-[10px] text-[#00FF00] mt-0.5">Zero Labor · Autonomous Ops</div>
+        </div>
+
+        <div class="bg-black p-3.5 rounded-xl border border-gray-900">
+          <div class="text-[10px] text-gray-500 uppercase tracking-wider">GLOBAL GEO CITATION AVG</div>
+          <div class="text-xl sm:text-2xl font-extrabold text-white mt-1">79.2%</div>
+          <div class="text-[10px] text-[#00FF00] mt-0.5">Perplexity & ChatGPT Search</div>
+        </div>
+
+        <div class="bg-black p-3.5 rounded-xl border border-gray-900">
+          <div class="text-[10px] text-gray-500 uppercase tracking-wider">SYSTEM CONSENSUS</div>
+          <div class="text-xl sm:text-2xl font-extrabold text-[#00FF00] mt-1 flex items-center gap-2">
+            <span>NOMINAL</span>
+            <span class="w-2 h-2 rounded-full bg-[#00FF00] animate-ping"></span>
+          </div>
+          <div class="text-[10px] text-gray-400 mt-0.5">5 Autonomous Agents Online</div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- ADVANCED TELEMETRY MONITORING BLOCK                      -->
+      <!-- ======================================================== -->
+      <section class="bg-[#05070a] border border-[#00FF00]/40 rounded-xl p-3.5 sm:p-4 space-y-4 shadow-[0_0_30px_rgba(0,255,0,0.08)] font-mono">
+        
+        <!-- SECTION TITLE BAR & AUTO-SCROLL TOGGLE -->
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-gray-900 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#00FF00] animate-pulse"></span>
+            <h2 class="text-xs sm:text-sm font-bold text-white tracking-tight uppercase">
+              AGENT TELEMETRY & NEURAL EXECUTION MONITOR
+            </h2>
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-[#00FF00]/10 text-[#00FF00] border border-[#00FF00]/30 font-bold hidden sm:inline">
+              LIVE RAW BUS
+            </span>
+          </div>
+
+          <!-- Auto-Scroll Toggle -->
+          <button id="autoScrollToggleBtn" onclick="toggleAutoScroll()" class="text-[10px] px-2.5 py-1 rounded border border-[#00FF00] text-[#00FF00] bg-black shadow-[0_0_10px_rgba(0,255,0,0.25)] font-bold transition-all cursor-pointer">
+            AUTO-SCROLL: ON
+          </button>
+        </div>
+
+        <!-- 1. AGENT LATENCY & HEALTH ALERT BAR -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between text-[10px] text-gray-400 uppercase font-bold">
+            <span>Agent Latency & Health Alert Bar</span>
+            <span class="text-gray-500 font-mono">Threshold: 200ms</span>
+          </div>
+
+          <!-- 5-Agent Latency Grid with Warning Badge for >200ms (Victoria) -->
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+            
+            <!-- Megan: 24ms -->
+            <div onclick="setAgentFilter('megan')" class="bg-black p-2.5 rounded-lg border border-gray-800 hover:border-[#00FF00] cursor-pointer transition-all">
+              <div class="flex items-center justify-between">
+                <span class="text-[9px] text-gray-400 font-bold">MEGAN VANCE</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-[#00FF00]"></span>
+              </div>
+              <div class="text-sm font-bold text-[#00FF00] mt-1">24ms</div>
+              <div class="text-[8px] text-gray-500 mt-0.5">CRM Briefs · NOMINAL</div>
+            </div>
+
+            <!-- Astra: 112ms -->
+            <div onclick="setAgentFilter('astra')" class="bg-black p-2.5 rounded-lg border border-gray-800 hover:border-[#00FF00] cursor-pointer transition-all">
+              <div class="flex items-center justify-between">
+                <span class="text-[9px] text-gray-400 font-bold">ASTRA</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-[#00FF00]"></span>
+              </div>
+              <div class="text-sm font-bold text-[#00FF00] mt-1">112ms</div>
+              <div class="text-[8px] text-gray-500 mt-0.5">DOM Speed · NOMINAL</div>
+            </div>
+
+            <!-- Julian: 45ms -->
+            <div onclick="setAgentFilter('julian')" class="bg-black p-2.5 rounded-lg border border-gray-800 hover:border-[#00FF00] cursor-pointer transition-all">
+              <div class="flex items-center justify-between">
+                <span class="text-[9px] text-gray-400 font-bold">JULIAN</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-[#00FF00]"></span>
+              </div>
+              <div class="text-sm font-bold text-[#00FF00] mt-1">45ms</div>
+              <div class="text-[8px] text-gray-500 mt-0.5">GEO Citations · NOMINAL</div>
+            </div>
+
+            <!-- Victoria: 210ms (FLAGGED >200ms ALERT) -->
+            <div onclick="setAgentFilter('victoria')" class="bg-amber-950/30 p-2.5 rounded-lg border border-amber-400 text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.25)] ring-1 ring-amber-400/50 cursor-pointer transition-all">
+              <div class="flex items-center justify-between">
+                <span class="text-[9px] text-amber-300 font-bold">VICTORIA</span>
+                <span class="text-[8px] px-1 py-0.2 rounded bg-amber-500/30 text-amber-300 font-bold border border-amber-500/60 animate-pulse">
+                  ⚠️ &gt;200ms
+                </span>
+              </div>
+              <div class="text-sm font-bold text-amber-400 mt-1">210ms ⚠️</div>
+              <div class="text-[8px] text-amber-300 font-bold mt-0.5">HIGH LATENCY FLAGGED</div>
+            </div>
+
+            <!-- Preston: 68ms -->
+            <div onclick="setAgentFilter('preston')" class="bg-black p-2.5 rounded-lg border border-gray-800 hover:border-[#00FF00] cursor-pointer transition-all">
+              <div class="flex items-center justify-between">
+                <span class="text-[9px] text-gray-400 font-bold">PRESTON</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-[#00FF00]"></span>
+              </div>
+              <div class="text-sm font-bold text-[#00FF00] mt-1">68ms</div>
+              <div class="text-[8px] text-gray-500 mt-0.5">Ledger Billing · NOMINAL</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 2. LOG TAG FILTER CHIPS -->
+        <div class="space-y-1.5 pt-1">
+          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+            <span class="text-[10px] text-gray-500 font-bold uppercase tracking-wider shrink-0 mr-1">LOG TAGS:</span>
+            
+            <button onclick="setAgentFilter('all')" id="chip-all" class="filter-chip px-2.5 py-1 rounded text-xs font-mono font-bold bg-[#00FF00]/20 text-[#00FF00] border border-[#00FF00] shadow-[0_0_10px_rgba(0,255,0,0.3)] shrink-0 transition-all">
+              [ALL]
+            </button>
+            <button onclick="setAgentFilter('megan')" id="chip-megan" class="filter-chip px-2.5 py-1 rounded text-xs font-mono font-bold bg-[#090d13] text-gray-400 hover:text-white border border-gray-800 hover:border-gray-700 shrink-0 transition-all">
+              [MEGAN]
+            </button>
+            <button onclick="setAgentFilter('astra')" id="chip-astra" class="filter-chip px-2.5 py-1 rounded text-xs font-mono font-bold bg-[#090d13] text-gray-400 hover:text-white border border-gray-800 hover:border-gray-700 shrink-0 transition-all">
+              [ASTRA]
+            </button>
+            <button onclick="setAgentFilter('julian')" id="chip-julian" class="filter-chip px-2.5 py-1 rounded text-xs font-mono font-bold bg-[#090d13] text-gray-400 hover:text-white border border-gray-800 hover:border-gray-700 shrink-0 transition-all">
+              [JULIAN]
+            </button>
+            <button onclick="setAgentFilter('victoria')" id="chip-victoria" class="filter-chip px-2.5 py-1 rounded text-xs font-mono font-bold bg-[#090d13] text-gray-400 hover:text-white border border-gray-800 hover:border-gray-700 shrink-0 transition-all">
+              [VICTORIA]
+            </button>
+            <button onclick="setAgentFilter('preston')" id="chip-preston" class="filter-chip px-2.5 py-1 rounded text-xs font-mono font-bold bg-[#090d13] text-gray-400 hover:text-white border border-gray-800 hover:border-gray-700 shrink-0 transition-all">
+              [PRESTON]
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. TERMINAL LOG FEED -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between text-[10px] text-gray-400 px-1">
+            <span>STREAMING RAW LOGS (<span id="logCountLabel" class="text-[#00FF00] font-bold">5</span> EVENTS)</span>
+            <span class="text-gray-500">FORMAT: ISO8601 · LATENCY · PAYLOAD DIFF</span>
+          </div>
+
+          <div id="terminalLogContainer" class="bg-black rounded-lg border border-gray-900 p-2 max-h-[360px] overflow-y-auto space-y-2 font-mono text-xs">
+            <!-- Dynamically Rendered via JS -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 5-AGENT FORCE CARDS -->
+      <section class="space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-white font-mono flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#00FF00]"></span>
+            <span>Autonomous 5-Agent Operating Force</span>
+          </h3>
+          <span class="text-xs text-gray-500 font-mono">100% Autonomous Execution</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          
+          <!-- Megan Card -->
+          <div class="bg-black rounded-xl p-4 border border-gray-900 hover:border-[#00FF00]/60 transition-all space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <h4 class="font-bold text-white text-sm">Megan Vance</h4>
+                <p class="text-[11px] text-[#00FF00] font-mono">CRM, Intake & Executive Briefs</p>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#00FF00]/10 text-[#00FF00] border border-[#00FF00]/30 font-bold">
+                24ms
+              </span>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed">Synthesizes inbound client discovery data, drafts client communication packages, and gates executive deliverables.</p>
+            <div class="flex items-center justify-between pt-2 border-t border-gray-900 text-[11px] font-mono">
+              <span class="text-gray-500">Status: <strong class="text-white">Active</strong></span>
+              <button onclick="triggerSimulatedAudit('megan')" class="px-2 py-1 rounded bg-gray-900 hover:bg-[#00FF00]/20 text-[#00FF00] border border-gray-800 hover:border-[#00FF00]/40 transition-colors">
+                Run Brief
+              </button>
+            </div>
+          </div>
+
+          <!-- Astra Card -->
+          <div class="bg-black rounded-xl p-4 border border-gray-900 hover:border-[#00FF00]/60 transition-all space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <h4 class="font-bold text-white text-sm">Astra</h4>
+                <p class="text-[11px] text-cyan-400 font-mono">DOM Mutation & Technical Speed</p>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-bold">
+                112ms
+              </span>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed">Benchmarks sub-millisecond Core Web Vitals, eliminates JavaScript hydration bloat, and enforces edge performance.</p>
+            <div class="flex items-center justify-between pt-2 border-t border-gray-900 text-[11px] font-mono">
+              <span class="text-gray-500">Status: <strong class="text-white">Active</strong></span>
+              <button onclick="triggerSimulatedAudit('astra')" class="px-2 py-1 rounded bg-gray-900 hover:bg-cyan-500/20 text-cyan-400 border border-gray-800 hover:border-cyan-500/40 transition-colors">
+                Benchmark
+              </button>
+            </div>
+          </div>
+
+          <!-- Julian Card -->
+          <div class="bg-black rounded-xl p-4 border border-gray-900 hover:border-[#00FF00]/60 transition-all space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <h4 class="font-bold text-white text-sm">Julian Thorne</h4>
+                <p class="text-[11px] text-yellow-400 font-mono">GEO Citation & Perplexity Engine</p>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-yellow-500/10 text-yellow-300 border border-yellow-500/30 font-bold">
+                45ms
+              </span>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed">Tracks AI search displacement across ChatGPT Search, Perplexity Sonar, and Google AI Overviews to enforce 75%+ SOV.</p>
+            <div class="flex items-center justify-between pt-2 border-t border-gray-900 text-[11px] font-mono">
+              <span class="text-gray-500">Status: <strong class="text-white">Active</strong></span>
+              <button onclick="triggerSimulatedAudit('julian')" class="px-2 py-1 rounded bg-gray-900 hover:bg-yellow-500/20 text-yellow-400 border border-gray-800 hover:border-yellow-500/40 transition-colors">
+                Probe Citations
+              </button>
+            </div>
+          </div>
+
+          <!-- Victoria Card -->
+          <div class="bg-black rounded-xl p-4 border border-amber-500/50 hover:border-amber-400 transition-all space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <h4 class="font-bold text-white text-sm">Victoria Sterling</h4>
+                <p class="text-[11px] text-amber-400 font-mono">Schema & Knowledge Graph Architect</p>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/50 font-bold animate-pulse">
+                210ms ⚠️
+              </span>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed">Locks JSON-LD knowledge graph against drift, synthesizes entity nodes, and monitors schema validation pass-rates.</p>
+            <div class="flex items-center justify-between pt-2 border-t border-gray-900 text-[11px] font-mono">
+              <span class="text-amber-400">Warning: <strong>&gt;200ms Latency</strong></span>
+              <button onclick="triggerSimulatedAudit('victoria')" class="px-2 py-1 rounded bg-amber-950/40 hover:bg-amber-500/20 text-amber-300 border border-amber-500/40 transition-colors">
+                Optimize Graph
+              </button>
+            </div>
+          </div>
+
+          <!-- Preston Card -->
+          <div class="bg-black rounded-xl p-4 border border-gray-900 hover:border-[#00FF00]/60 transition-all space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <h4 class="font-bold text-white text-sm">Preston Vance</h4>
+                <p class="text-[11px] text-emerald-400 font-mono">Autonomous Ledger & Retainers</p>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 font-bold">
+                68ms
+              </span>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed">Monitors multi-currency retainer compliance ($1,500/mo standard, $750/mo wholesale), token margins, and Stripe auto-invoicing.</p>
+            <div class="flex items-center justify-between pt-2 border-t border-gray-900 text-[11px] font-mono">
+              <span class="text-gray-500">Status: <strong class="text-white">Active</strong></span>
+              <button onclick="triggerSimulatedAudit('preston')" class="px-2 py-1 rounded bg-gray-900 hover:bg-emerald-500/20 text-emerald-400 border border-gray-800 hover:border-emerald-500/40 transition-colors">
+                Audit Ledger
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW B: ISOLATED CLIENT PORTAL (WHITELABEL)-->
+    <!-- ========================================== -->
+    <div id="clientPortalView" class="hidden space-y-5">
+      <div class="bg-[#05070a] border border-gray-800 rounded-xl p-4 space-y-4">
+        
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gray-800 pb-3">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-[#00FF00]/10 text-[#00FF00] border border-[#00FF00]/30 font-mono text-xs font-bold">
+                CLIENT CONFIDENTIAL REPORT
+              </span>
+              <span class="text-xs text-gray-500 font-mono">ID: NX-CPT-8902</span>
+            </div>
+            <h2 class="text-lg font-bold text-white mt-1">CapeBio Diagnostics — GEO & Technical Performance</h2>
+          </div>
+          <button onclick="downloadClientBrief()" class="px-3 py-1.5 rounded-lg bg-[#00FF00]/20 hover:bg-[#00FF00]/30 border border-[#00FF00]/50 text-[#00FF00] text-xs font-mono font-bold transition-all">
+            Download Executive PDF
+          </button>
+        </div>
+
+        <!-- Client KPI Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono">
+          <div class="bg-black p-3 rounded-lg border border-gray-900">
+            <span class="text-[10px] text-gray-500">AI SHARE-OF-VOICE</span>
+            <div class="text-xl font-bold text-[#00FF00] mt-0.5">84.2%</div>
+            <span class="text-[10px] text-gray-400">#1 in Western Cape</span>
+          </div>
+          <div class="bg-black p-3 rounded-lg border border-gray-900">
+            <span class="text-[10px] text-gray-500">SCHEMA GRAPH LOCK</span>
+            <div class="text-xl font-bold text-white mt-0.5">100%</div>
+            <span class="text-[10px] text-[#00FF00]">Zero Drift Verified</span>
+          </div>
+          <div class="bg-black p-3 rounded-lg border border-gray-900">
+            <span class="text-[10px] text-gray-500">CORE WEB VITALS</span>
+            <div class="text-xl font-bold text-white mt-0.5">0.82s LCP</div>
+            <span class="text-[10px] text-[#00FF00]">Passed 100% Mobile</span>
+          </div>
+          <div class="bg-black p-3 rounded-lg border border-gray-900">
+            <span class="text-[10px] text-gray-500">MONTHLY RETAINER</span>
+            <div class="text-xl font-bold text-emerald-400 mt-0.5" id="clientPortalRetainer">$1,500/mo</div>
+            <span class="text-[10px] text-gray-400">ROI Multiple: 8.4x</span>
+          </div>
+        </div>
+
+        <!-- Citation Engine Distribution -->
+        <div class="bg-black p-3.5 rounded-lg border border-gray-900 space-y-2">
+          <h4 class="text-xs font-bold text-gray-300 font-mono uppercase">Generative Search Citation Penetration</h4>
+          <div class="space-y-1.5 text-xs font-mono">
+            <div>
+              <div class="flex justify-between text-gray-400 text-[11px] mb-1">
+                <span>Perplexity Sonar & Pro</span>
+                <span class="text-[#00FF00] font-bold">88% SOV</span>
+              </div>
+              <div class="w-full bg-gray-900 h-2 rounded-full overflow-hidden">
+                <div class="bg-[#00FF00] h-2 rounded-full" style="width: 88%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-gray-400 text-[11px] mb-1">
+                <span>ChatGPT Search & OpenAI Operator</span>
+                <span class="text-cyan-400 font-bold">81% SOV</span>
+              </div>
+              <div class="w-full bg-gray-900 h-2 rounded-full overflow-hidden">
+                <div class="bg-cyan-400 h-2 rounded-full" style="width: 81%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-gray-400 text-[11px] mb-1">
+                <span>Google AI Overviews</span>
+                <span class="text-yellow-400 font-bold">74% SOV</span>
+              </div>
+              <div class="w-full bg-gray-900 h-2 rounded-full overflow-hidden">
+                <div class="bg-yellow-400 h-2 rounded-full" style="width: 74%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- 3. PAYLOAD DIFF INSPECTOR MODAL                          -->
+  <!-- ======================================================== -->
+  <div id="diffModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5">
+    <div class="w-full max-w-4xl bg-[#030712] border border-[#00FF00] rounded-xl shadow-[0_0_50px_rgba(0,255,0,0.25)] flex flex-col max-h-[90vh] overflow-hidden font-mono">
+      
+      <!-- Modal Header -->
+      <div class="bg-[#0A0A0A] border-b border-gray-800 px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#00FF00] animate-pulse"></span>
+          <span id="diffModalTitle" class="text-white font-bold tracking-tight text-xs sm:text-sm">
+            PAYLOAD DIFF INSPECTOR
+          </span>
+          <span class="text-[9px] px-1.5 py-0.5 rounded bg-[#00FF00]/10 text-[#00FF00] border border-[#00FF00]/30 font-bold uppercase">
+            ACTIVE DIFF ENGINE
+          </span>
+        </div>
+        <button onclick="closeDiffModal()" class="p-1 rounded text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Subheader Meta Info -->
+      <div class="bg-[#05070a] px-4 py-2 border-b border-gray-900 flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-400">
+        <div class="flex items-center gap-3 flex-wrap">
+          <span>Action: <strong id="diffMetaAction" class="text-[#00FF00]">SPATIAL_SOV_PERPLEXITY_PROBE</strong></span>
+          <span>Time: <strong id="diffMetaTime" class="text-gray-300">[02:31:04.112]</strong></span>
+          <span>Latency: <strong id="diffMetaLatency" class="text-white">45ms</strong></span>
+        </div>
+        <div>
+          <span>Route: <code id="diffMetaRoute" class="text-gray-300">/api/v1/geo/spatial-probe</code></span>
+        </div>
+      </div>
+
+      <!-- Modal Body: Side-by-side (desktop) / Stacked (mobile) JSON Diff -->
+      <div class="p-4 overflow-y-auto space-y-4 bg-black">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          
+          <!-- PREVIOUS STATE (Red-tinted text) -->
+          <div class="rounded-lg border border-red-500/40 bg-red-950/20 p-3 flex flex-col">
+            <div class="flex items-center justify-between border-b border-red-500/30 pb-1.5 mb-2">
+              <span class="text-[11px] font-bold text-red-400 uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                PREVIOUS STATE (PRIOR MUTATION)
+              </span>
+              <span class="text-[9px] text-red-300 font-mono px-1.5 py-0.5 rounded bg-red-900/50 border border-red-500/30 font-bold">
+                BEFORE
+              </span>
+            </div>
+            <pre id="diffPreviousStatePre" class="text-xs text-red-400 font-mono overflow-auto max-h-64 leading-relaxed p-2.5 bg-[#0d0202] rounded border border-red-950 select-text">
+            </pre>
+          </div>
+
+          <!-- NEW PAYLOAD (Green-tinted text) -->
+          <div class="rounded-lg border border-[#00FF00]/50 bg-[#00FF00]/5 p-3 flex flex-col shadow-[0_0_15px_rgba(0,255,0,0.08)]">
+            <div class="flex items-center justify-between border-b border-[#00FF00]/30 pb-1.5 mb-2">
+              <span class="text-[11px] font-bold text-[#00FF00] uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-[#00FF00] animate-pulse"></span>
+                NEW PAYLOAD (ACTIVE TELEMETRY)
+              </span>
+              <span class="text-[9px] text-[#00FF00] font-mono px-1.5 py-0.5 rounded bg-[#00FF00]/20 border border-[#00FF00]/40 font-bold">
+                AFTER
+              </span>
+            </div>
+            <pre id="diffNewPayloadPre" class="text-xs text-[#00FF00] font-mono overflow-auto max-h-64 leading-relaxed p-2.5 bg-[#000d02] rounded border border-[#003308] select-text">
+            </pre>
+          </div>
+
+        </div>
+
+        <!-- Raw Token Output Consensus -->
+        <div class="space-y-1">
+          <div class="text-[10px] text-gray-400 uppercase font-bold flex items-center gap-1.5">
+            <span class="text-[#00FF00]">RAW TOKEN OUTPUT CONSENSUS</span>
+          </div>
+          <pre id="diffRawTokensPre" class="text-xs text-[#00FF00] bg-[#020502] p-3 rounded-lg border border-[#00FF00]/30 font-mono overflow-auto max-h-36 leading-relaxed whitespace-pre-wrap select-text">
+          </pre>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="bg-[#0A0A0A] border-t border-gray-800 px-4 py-3 flex items-center justify-between gap-3">
+        <span class="text-[11px] text-gray-500 font-mono">
+          Engine: <span class="text-cyan-400">gemini-2.5-flash (Node Host: eu-west-3)</span>
+        </span>
+        <div class="flex items-center gap-2">
+          <button onclick="copyActivePayload()" class="px-3 py-1.5 rounded-lg bg-[#161b22] hover:bg-[#21262d] border border-gray-700 text-xs text-white font-mono transition-all cursor-pointer hover:border-[#00FF00]">
+            Copy New Payload
+          </button>
+          <button onclick="closeDiffModal()" class="px-3.5 py-1.5 rounded-lg bg-[#00FF00]/20 hover:bg-[#00FF00]/30 border border-[#00FF00]/60 text-[#00FF00] text-xs font-mono font-bold transition-all shadow-[0_0_12px_rgba(0,255,0,0.2)]">
+            Close Diff
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- WHITE-LABEL AGENCY SETTINGS MODAL                        -->
+  <!-- ======================================================== -->
+  <div id="settingsModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-lg bg-[#0a0f18] border border-gray-800 rounded-xl p-5 space-y-4 font-mono">
+      <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+        <h3 class="text-sm font-bold text-white uppercase tracking-wider">White-Label OS Settings</h3>
+        <button onclick="toggleSettingsModal(false)" class="text-gray-400 hover:text-white">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-gray-400 mb-1">Agency Name</label>
+          <input type="text" id="agencyNameInput" value="NexPulse Apex Media Group" class="w-full bg-black border border-gray-800 rounded p-2 text-white focus:outline-none focus:border-[#00FF00]">
+        </div>
+        <div>
+          <label class="block text-gray-400 mb-1">Custom CNAME Domain</label>
+          <input type="text" value="portal.apexmediagroup.io" class="w-full bg-black border border-gray-800 rounded p-2 text-white focus:outline-none focus:border-[#00FF00]">
+        </div>
+        <div>
+          <label class="block text-gray-400 mb-1">Accent Theme Color</label>
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded bg-[#00FF00] border border-white/20"></span>
+            <span class="text-gray-300">#00FF00 (Obsidian Neon)</span>
+          </div>
+        </div>
+        <div class="pt-2 flex items-center justify-between">
+          <span class="text-gray-400">Automate Executive Friday PDF Briefs</span>
+          <input type="checkbox" checked class="accent-[#00FF00] cursor-pointer w-4 h-4">
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-gray-800 flex justify-end gap-2">
+        <button onclick="toggleSettingsModal(false)" class="px-3 py-1.5 rounded bg-gray-900 border border-gray-700 text-gray-300 text-xs">Cancel</button>
+        <button onclick="saveSettings()" class="px-3 py-1.5 rounded bg-[#00FF00]/20 border border-[#00FF00] text-[#00FF00] text-xs font-bold">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT STATE ENGINE                                  -->
+  <!-- ======================================================== -->
+  <script>
+    // State
+    let currentCurrency = 'USD';
+    let isPitchDemo = true;
+    let autoScroll = true;
+    let selectedAgentFilter = 'all';
+    let activeDiffLog = null;
+
+    // Currency Multipliers & Symbols
+    const CURRENCIES = {
+      USD: { symbol: '$', rate: 1, label: 'USD' },
+      GBP: { symbol: '£', rate: 0.79, label: 'GBP' },
+      EUR: { symbol: '€', rate: 0.92, label: 'EUR' },
+      ZAR: { symbol: 'R', rate: 18.40, label: 'ZAR' }
+    };
+
+    // Telemetry Logs Seed Data with Detailed Previous vs New States
+    const LOGS = [
+      {
+        id: 'log-1',
+        agent: 'julian',
+        agentName: 'Julian Thorne',
+        timestamp: '02:31:04.112',
+        latency: 45,
+        action: 'SPATIAL_SOV_PERPLEXITY_PROBE',
+        client: 'CapeBio Diagnostics (Cape Town)',
+        route: '/api/v1/geo/spatial-probe',
+        previousState: {
+          client: "CapeBio Diagnostics",
+          territory: "Cape Town, South Africa",
+          sov_rate: 0.68,
+          perplexity_citations: 14,
+          citation_decay_flag: true,
+          schema_sync: "pending_refresh"
+        },
+        newPayload: {
+          client: "CapeBio Diagnostics",
+          territory: "Cape Town, South Africa",
+          sov_rate: 0.84,
+          perplexity_citations: 28,
+          citation_decay_flag: false,
+          schema_sync: "validated_schema_org"
+        },
+        rawTokens: "PERPLEXITY_SONAR_EXEC_OK [200]: Citation frequency lifted from 0.68 to 0.84 following Organization JSON-LD injection across Cape Town spatial cluster."
+      },
+      {
+        id: 'log-2',
+        agent: 'victoria',
+        agentName: 'Victoria Sterling',
+        timestamp: '02:30:58.640',
+        latency: 210, // Exceeds 200ms
+        action: 'SCHEMA_GRAPH_SYNTHESIS',
+        client: 'AeroPulse Dynamics (Seattle)',
+        route: '/api/v1/schema/generate-graph',
+        previousState: {
+          entity: "AeroPulse Autonomous Turbofans",
+          schema_status: "INVALID_SYNTAX_DETECTED",
+          missing_keys: ["spatialCoverage", "author.Organization"],
+          drift_detected: true
+        },
+        newPayload: {
+          entity: "AeroPulse Autonomous Turbofans",
+          schema_status: "ZERO_DRIFT_LOCKED",
+          schema_type: "TechArticle + Organization + Speakable",
+          drift_detected: false,
+          validation_nodes: 418
+        },
+        rawTokens: "SCHEMA_GRAPH_SYNTHESIS_OK [200]: Knowledge graph locked with 418 verified entity references. Execution latency flagged at 210ms due to multi-node JSON-LD validation."
+      },
+      {
+        id: 'log-3',
+        agent: 'astra',
+        agentName: 'Astra',
+        timestamp: '02:30:41.200',
+        latency: 112,
+        action: 'DOM_HYDRATION_BENCHMARK',
+        client: 'Synthetix Health (Boston)',
+        route: '/api/v1/telemetry/lighthouse-dom',
+        previousState: {
+          targetUrl: "https://synthetixhealth.com/platform/telehealth",
+          lcp_ms: 1840,
+          inp_ms: 72,
+          cls: 0.082,
+          status: "NEEDS_IMPROVEMENT"
+        },
+        newPayload: {
+          targetUrl: "https://synthetixhealth.com/platform/telehealth",
+          lcp_ms: 820,
+          inp_ms: 28,
+          cls: 0.002,
+          status: "DOMINANT_TIER"
+        },
+        rawTokens: "CORE_WEB_VITALS_MUTATION_COMPLETE: LCP optimized to 820ms (-1020ms delta). Mobile INP sub-30ms nominal."
+      },
+      {
+        id: 'log-4',
+        agent: 'megan',
+        agentName: 'Megan Vance',
+        timestamp: '02:29:15.890',
+        latency: 24,
+        action: 'EXECUTIVE_BRIEF_COMPILATION',
+        client: 'Apex Law (London)',
+        route: '/api/v1/reports/executive-brief',
+        previousState: {
+          recipient: "Joel Ribeiro (Lead Architect)",
+          client: "Apex Law UK",
+          brief_state: "draft_queued",
+          approval_gate: "PENDING_ARCHITECT"
+        },
+        newPayload: {
+          recipient: "Joel Ribeiro (Lead Architect)",
+          client: "Apex Law UK",
+          brief_state: "READY_FOR_DELIVERY",
+          approval_gate: "APPROVED",
+          audit_highlights: ["#1 Law Firm Citation in London", "Zero Drift Locked"]
+        },
+        rawTokens: "BRIEF_SYNTHESIS_OK [200]: 60-Second executive brief packaged for Apex Law. Execution complete in 24ms."
+      },
+      {
+        id: 'log-5',
+        agent: 'preston',
+        agentName: 'Preston Vance',
+        timestamp: '02:28:44.015',
+        latency: 68,
+        action: 'RETAINER_COMPLIANCE_AUDIT',
+        client: 'Zurich Biotech (Zurich)',
+        route: '/api/v1/finance/retainer-compliance',
+        previousState: {
+          client: "Zurich Biotech",
+          monthlyRetainerUsd: 1500,
+          api_burn_usd: 14.20,
+          gross_margin: 0.89,
+          compliance_flag: "awaiting_audit"
+        },
+        newPayload: {
+          client: "Zurich Biotech",
+          monthlyRetainerUsd: 1500,
+          api_burn_usd: 8.42,
+          gross_margin: 0.94,
+          compliance_flag: "COMPLIANT_ACTIVE"
+        },
+        rawTokens: "LEDGER_AUDIT_OK [200]: Client spend generating 8.32x media equivalent value. Margin locked at 94%."
+      }
+    ];
+
+    // Initialize View
+    function init() {
+      renderLogs();
+      updateFinancials();
+    }
+
+    // Render Filtered Logs
+    function renderLogs() {
+      const container = document.getElementById('terminalLogContainer');
+      const filtered = selectedAgentFilter === 'all' 
+        ? LOGS 
+        : LOGS.filter(l => l.agent === selectedAgentFilter);
+
+      document.getElementById('logCountLabel').innerText = filtered.length;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="py-8 text-center text-gray-500 font-mono text-xs">
+            No active execution logs for [${selectedAgentFilter.toUpperCase()}].
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(log => {
+        const isAlert = log.latency > 200;
+        return `
+          <div class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 p-2 rounded-lg bg-[#0d1117] border border-gray-800 hover:border-gray-700 transition-colors">
+            
+            <!-- Left Info -->
+            <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap min-w-0 flex-1">
+              <span class="text-gray-500 text-[11px] font-mono shrink-0">[${log.timestamp}]</span>
+              <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-black text-white border border-gray-800 shrink-0">
+                ${log.agentName}
+              </span>
+              <span class="text-xs font-mono shrink-0 ${isAlert ? 'text-amber-400 font-bold' : 'text-gray-400'}">
+                ${log.latency}ms ${isAlert ? '⚠️' : ''}
+              </span>
+              <span class="text-[#00FF00] font-bold truncate text-xs">
+                ${log.action}
+              </span>
+              <span class="text-gray-500 text-xs hidden md:inline truncate">
+                @${log.client}
+              </span>
+            </div>
+
+            <!-- Right Actions: [PAYLOAD DIFF] Button -->
+            <div class="flex items-center gap-2 shrink-0 ml-auto">
+              <button onclick="openDiffModal('${log.id}')" class="text-[9px] font-mono font-bold px-2 py-0.5 rounded border border-[#00FF00]/40 text-[#00FF00] bg-[#00FF00]/10 hover:bg-[#00FF00]/25 transition-all cursor-pointer shadow-[0_0_8px_rgba(0,255,0,0.15)]">
+                [PAYLOAD DIFF]
+              </button>
+              <span class="text-[9px] font-bold px-1.5 py-0.5 rounded border uppercase ${isAlert ? 'bg-amber-500/10 border-amber-500/40 text-amber-300' : 'bg-[#00FF00]/10 border-[#00FF00]/30 text-[#00FF00]'}">
+                ${isAlert ? 'FLAGGED' : 'NOMINAL'}
+              </span>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+
+      if (autoScroll) {
+        container.scrollTop = 0;
+      }
+    }
+
+    // Filter Chips Handler
+    function setAgentFilter(agentId) {
+      selectedAgentFilter = agentId;
+      document.querySelectorAll('.filter-chip').forEach(el => {
+        el.className = 'filter-chip px-2.5 py-1 rounded text-xs font-mono font-bold bg-[#090d13] text-gray-400 hover:text-white border border-gray-800 hover:border-gray-700 shrink-0 transition-all';
+      });
+      const active = document.getElementById('chip-' + agentId);
+      if (active) {
+        active.className = 'filter-chip px-2.5 py-1 rounded text-xs font-mono font-bold bg-[#00FF00]/20 text-[#00FF00] border border-[#00FF00] shadow-[0_0_10px_rgba(0,255,0,0.3)] shrink-0 transition-all';
+      }
+      renderLogs();
+    }
+
+    // Toggle Auto-Scroll
+    function toggleAutoScroll() {
+      autoScroll = !autoScroll;
+      const btn = document.getElementById('autoScrollToggleBtn');
+      if (autoScroll) {
+        btn.innerText = 'AUTO-SCROLL: ON';
+        btn.className = 'text-[10px] px-2.5 py-1 rounded border border-[#00FF00] text-[#00FF00] bg-black shadow-[0_0_10px_rgba(0,255,0,0.25)] font-bold transition-all cursor-pointer';
+      } else {
+        btn.innerText = 'AUTO-SCROLL: OFF';
+        btn.className = 'text-[10px] px-2.5 py-1 rounded border border-gray-800 text-gray-500 bg-gray-950 font-bold transition-all cursor-pointer';
+      }
+    }
+
+    // Open Payload Diff Modal
+    function openDiffModal(logId) {
+      const log = LOGS.find(l => l.id === logId);
+      if (!log) return;
+      activeDiffLog = log;
+
+      document.getElementById('diffModalTitle').innerText = `${log.agentName.toUpperCase()} — PAYLOAD DIFF INSPECTOR`;
+      document.getElementById('diffMetaAction').innerText = log.action;
+      document.getElementById('diffMetaTime').innerText = `[${log.timestamp}]`;
+      document.getElementById('diffMetaLatency').innerHTML = `${log.latency}ms ${log.latency > 200 ? '<span class="text-amber-400 font-bold">⚠️ &gt;200ms FLAGGED</span>' : ''}`;
+      document.getElementById('diffMetaRoute').innerText = log.route;
+
+      document.getElementById('diffPreviousStatePre').innerText = JSON.stringify(log.previousState, null, 2);
+      document.getElementById('diffNewPayloadPre').innerText = JSON.stringify(log.newPayload, null, 2);
+      document.getElementById('diffRawTokensPre').innerText = log.rawTokens;
+
+      document.getElementById('diffModal').classList.remove('hidden');
+    }
+
+    // Close Payload Diff Modal
+    function closeDiffModal() {
+      document.getElementById('diffModal').classList.add('hidden');
+      activeDiffLog = null;
+    }
+
+    // Copy Payload
+    function copyActivePayload() {
+      if (!activeDiffLog) return;
+      navigator.clipboard.writeText(JSON.stringify(activeDiffLog.newPayload, null, 2));
+      alert('Active payload JSON copied to clipboard!');
+    }
+
+    // View Switcher (Founder vs Client Portal)
+    function switchView(view) {
+      const founderView = document.getElementById('founderConsoleView');
+      const clientView = document.getElementById('clientPortalView');
+      const founderBtn = document.getElementById('viewFounderBtn');
+      const clientBtn = document.getElementById('viewClientBtn');
+
+      if (view === 'founder') {
+        founderView.classList.remove('hidden');
+        clientView.classList.add('hidden');
+        founderBtn.className = 'px-2.5 py-1 rounded font-bold transition-all bg-[#00FF00]/20 text-[#00FF00] border border-[#00FF00]/40 shadow-[0_0_10px_rgba(0,255,0,0.2)]';
+        clientBtn.className = 'px-2.5 py-1 rounded font-bold text-gray-400 hover:text-white transition-all';
+      } else {
+        founderView.classList.add('hidden');
+        clientView.classList.remove('hidden');
+        clientBtn.className = 'px-2.5 py-1 rounded font-bold transition-all bg-[#00FF00]/20 text-[#00FF00] border border-[#00FF00]/40 shadow-[0_0_10px_rgba(0,255,0,0.2)]';
+        founderBtn.className = 'px-2.5 py-1 rounded font-bold text-gray-400 hover:text-white transition-all';
+      }
+    }
+
+    // Pitch Demo Toggle ($28,500 vs $0)
+    function togglePitchDemo() {
+      isPitchDemo = !isPitchDemo;
+      const demoDot = document.getElementById('demoDot');
+      const demoText = document.getElementById('demoText');
+      if (isPitchDemo) {
+        demoDot.className = 'w-1.5 h-1.5 rounded-full bg-[#00FF00]';
+        demoText.innerText = 'DEMO: $28.5k MRR';
+      } else {
+        demoDot.className = 'w-1.5 h-1.5 rounded-full bg-gray-500';
+        demoText.innerText = 'LIVE: $0 BOOTSTRAP';
+      }
+      updateFinancials();
+    }
+
+    // Currency Switcher
+    function changeCurrency(curr) {
+      currentCurrency = curr;
+      updateFinancials();
+    }
+
+    function updateFinancials() {
+      const c = CURRENCIES[currentCurrency];
+      const baseMrr = isPitchDemo ? 28500 : 0;
+      const convertedMrr = Math.round(baseMrr * c.rate);
+      const convertedRetainer = Math.round(1500 * c.rate);
+
+      document.getElementById('metricMrr').innerText = `${c.symbol}${convertedMrr.toLocaleString()}`;
+      document.getElementById('clientPortalRetainer').innerText = `${c.symbol}${convertedRetainer.toLocaleString()}/mo`;
+    }
+
+    // Simulated Run Trigger
+    function triggerSimulatedAudit(agentId) {
+      const time = new Date().toTimeString().split(' ')[0] + '.' + Math.floor(Math.random() * 900 + 100);
+      const lat = agentId === 'victoria' ? Math.floor(Math.random() * 50 + 205) : Math.floor(Math.random() * 70 + 20);
+      
+      const newLog = {
+        id: 'log-' + Date.now(),
+        agent: agentId,
+        agentName: agentId.toUpperCase(),
+        timestamp: time,
+        latency: lat,
+        action: agentId.toUpperCase() + '_MANUAL_AUDIT_CYCLE',
+        client: 'Synthetix Health (Boston)',
+        route: '/api/v1/' + agentId + '/manual-sweep',
+        previousState: {
+          status: "prior_cycle_evaluating",
+          latency_ms: lat - 12
+        },
+        newPayload: {
+          status: "CYCLE_COMPLETED_NOMINAL",
+          latency_ms: lat,
+          timestamp: time
+        },
+        rawTokens: "SYNTHESIS_STREAM_OK [200]: Manual audit pulse completed across active client partition."
+      };
+
+      LOGS.unshift(newLog);
+      renderLogs();
+    }
+
+    function toggleSettingsModal(show) {
+      const modal = document.getElementById('settingsModal');
+      if (show) modal.classList.remove('hidden');
+      else modal.classList.add('hidden');
+    }
+
+    function saveSettings() {
+      toggleSettingsModal(false);
+      alert('Whitelabel agency settings applied successfully.');
+    }
+
+    function downloadClientBrief() {
+      alert('Generating executive Geo & Technical SEO Brief (PDF)... Download starting.');
+    }
+
+    // Run on load
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+
+</body>
+</html>
